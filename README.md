@@ -20,66 +20,20 @@ lib/
 │
 ├── main.dart
 │
-├── core/
-│   ├── constants/
-│   │   ├── app_colors.dart
-│   │   ├── app_text_styles.dart
-│   │   ├── app_sizes.dart
-│   │   └── app_strings.dart
-│   │
-│   └── theme/
-│       └── app_theme.dart
+├── constants/
+│   ├── api_endpints.dart
+│   └── colors.dart
+│   └── theme.dart
 │
-├── data/
-│   ├── models/
-│   │   ├── user_model.dart
-│   │   ├── reading_plan_model.dart
-│   │   ├── journal_model.dart
-│   │   └── prayer_model.dart
-│   │
-│   └── services/
-│       ├── auth_service.dart
-│       ├── firestore_service.dart
-│       └── remote_api_service.dart    // if using external APIs
+├── models/                    
+│   └── 
 │
-├── presentation/
-│   ├── screens/
-│   │   ├── splash/
-│   │   │   └── splash_screen.dart
-│   │   ├── auth/
-│   │   │   ├── login_screen.dart
-│   │   │   ├── signup_screen.dart
-│   │   │   ├── forgot_password_screen.dart
-│   │   │   └── verification_screen.dart
-│   │   ├── home/
-│   │   │   └── home_screen.dart
-│   │   ├── profile/
-│   │   │   └── profile_screen.dart
-│   │   ├── journal/
-│   │   │   └── journal_screen.dart
-│   │   ├── prayers/
-│   │   │   └── prayer_screen.dart
-│   │   ├── reading/
-│   │   │   └── reading_plan_screen.dart
-│   │   ├── lyrics/
-│   │   │   └── lyrics_screen.dart
-│   │   └── church_info/
-│   │       └── church_info_screen.dart
-│   │
-│   ├── widgets/
-│   │   ├── custom_button.dart
-│   │   ├── custom_textfield.dart
-│   │   ├── page_header.dart
-│   │   └── loading_indicator.dart
-│   │
-│   └── navigation/
-│       ├── app_router.dart
-│       └── bottom_nav.dart
-│
-└── state/
-    ├── auth_provider.dart
-    ├── user_provider.dart
-    ├── reading_plan_provider.dart
-    ├── journal_provider.dart
-    └── prayer_provider.dart
+├── pages/                 
+│   ├── splash.dart
+│   ├── login.dart
+│   ├── signup.dart
+│   ├── forgot_password.dart
+│   ├── verification.dart
+│   ├── home.dart
+│   ├── profile.dart
 ```
