@@ -1,6 +1,9 @@
-export 'homepage.dart';
+export 'homePage.dart';
 export 'about_church.dart';
 export 'prayer_logs.dart';
 export 'reading_plans.dart';
 export 'answered_prayers.dart';
 export 'lyrics.dart';
+export 'bottom_nav.dart';
+export 'plansPage.dart';
+export 'profilePage.dart';
