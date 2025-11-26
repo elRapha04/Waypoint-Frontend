@@ -7,3 +7,5 @@ export 'lyrics.dart';
 export 'bottom_nav.dart';
 export 'plansPage.dart';
 export 'profilePage.dart';
+export '../data/models/prayer_log_model.dart';
+export '../data/services/prayer_log_service.dart';
