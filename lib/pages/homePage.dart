@@ -1,7 +1,64 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import '../constants/colors.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String verseText = '"Loading verse..."';
+  String verseInfo = ''; // Book + chapter:verse + version
+
+  @override
+  void initState() {
+    super.initState();
+    fetchRandomVerse();
+  }
+
+  Future<void> fetchRandomVerse() async {
+    try {
+      final response = await http.get(
+        Uri.parse('https://biblebytopic.com/api/getrandompopularverse'),
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final verse = data['text'][0];
+
+        final textKJV = verse['text-kjv']?.trim() ?? '';
+        final book = verse['bookname'] ?? '';
+        final chapter = verse['chapter']?.toString() ?? '';
+        final startVerse = verse['startingverse']?.toString() ?? '';
+        final endVerse = verse['endingverse']?.toString() ?? '';
+        final version = data['version'] ?? '';
+
+        // Combine start and end verse if needed
+        String reference = startVerse;
+        if (endVerse.isNotEmpty && endVerse != startVerse) {
+          reference = '$startVerse-$endVerse';
+        }
+
+        setState(() {
+          verseText = textKJV;
+          verseInfo = '$book $chapter:$reference [$version]';
+        });
+      } else {
+        setState(() {
+          verseText = 'Failed to load verse.';
+          verseInfo = '';
+        });
+      }
+    } catch (e) {
+      setState(() {
+        verseText = 'Error loading verse.';
+        verseInfo = '';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,7 +66,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('WAYPOINT'),
         backgroundColor: primaryBackground,
-        centerTitle: true
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -27,7 +84,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
 
-            // Verse of the Day Content with background image (daily changing)
+            // Verse of the Day Content with background image
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: ClipRRect(
@@ -37,7 +94,7 @@ class HomePage extends StatelessWidget {
                   width: double.infinity,
                   child: Stack(
                     children: [
-                      // Background image
+                      // Background image (daily changing)
                       Image.asset(
                         [
                           'assets/images/bg1.jpg',
@@ -58,17 +115,34 @@ class HomePage extends StatelessWidget {
                       ),
 
                       // Centered verse text
-                      Center(
+                      Align(
+                        alignment: Alignment.center,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                          child: Text(
-                            '"For God so loved the world..."',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                verseText, // no extra quotes
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                verseInfo,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                                softWrap: true,
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -77,7 +151,6 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-
 
             SizedBox(height: 24),
 
