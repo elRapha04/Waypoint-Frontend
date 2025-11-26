@@ -27,31 +27,57 @@ class HomePage extends StatelessWidget {
               ),
             ),
 
-            // Verse of the Day Content with background image
+            // Verse of the Day Content with background image (daily changing)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Container(
-                height: 150,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/674632.jpg'), // your bg image
-                    fit: BoxFit.cover
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  '"For God so loved the world..."',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: SizedBox(
+                  height: 150,
+                  width: double.infinity,
+                  child: Stack(
+                    children: [
+                      // Background image
+                      Image.asset(
+                        [
+                          'assets/images/bg1.jpg',
+                          'assets/images/bg2.jpg',
+                          'assets/images/bg3.jpg',
+                          'assets/images/bg4.jpg',
+                          'assets/images/bg5.jpg',
+                          'assets/images/bg6.jpg',
+                        ][DateTime.now().difference(DateTime(DateTime.now().year)).inDays % 6],
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                      ),
+
+                      // Black overlay
+                      Container(
+                        color: const Color(0xFF000000).withValues(alpha: 0.4),
+                      ),
+
+                      // Centered verse text
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: Text(
+                            '"For God so loved the world..."',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
+
 
             SizedBox(height: 24),
 
@@ -92,32 +118,40 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, '/lyrics');
-                },
-                child: Container(
-                  height: 120,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/lyrics.jpg'),
-                      fit: BoxFit.cover,
-                    ),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Worship Lyrics',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                onTap: () => Navigator.pushNamed(context, '/lyrics'),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: SizedBox(
+                    height: 120, // This ensures proper centering
+                    child: Stack(
+                      children: [
+                        Image.asset(
+                          'assets/images/lyrics.jpg',
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                        ),
+
+                        Container(
+                          color: const Color(0xFF000000).withValues(alpha: 0.4),
+                        ),
+
+                        Center(
+                          child: Text(
+                            'Worship Lyrics',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
             ),
-
             SizedBox(height: 24),
           ],
         ),
@@ -126,27 +160,42 @@ class HomePage extends StatelessWidget {
   }
 
   // Helper method to build a category item
-  Widget buildCategoryItem(BuildContext context, String title, String imagePath, String route) {
+  Widget buildCategoryItem(
+      BuildContext context,
+      String title,
+      String imagePath,
+      String route,
+      ) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, route);
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(imagePath),
-            fit: BoxFit.cover,
-          ),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        alignment: Alignment.center,
-        child: Text(
-          title,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
+      onTap: () => Navigator.pushNamed(context, route),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: SizedBox.expand(
+          child: Stack(
+            children: [
+              Image.asset(
+                imagePath,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
+              ),
+
+              Container(
+                color: const Color(0xFF000000).withValues(alpha: 0.4),
+              ),
+
+              Center(
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
