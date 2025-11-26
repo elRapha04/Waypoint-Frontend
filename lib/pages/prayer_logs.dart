@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:waypoint_frontend/constants/colors.dart';
 import 'package:waypoint_frontend/data/models/prayer_log_model.dart';
 import 'package:waypoint_frontend/data/services/prayer_log_service.dart';
 
@@ -96,8 +97,10 @@ class _PrayerLogsPageState extends State<PrayerLogsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: secondaryBackground,
       appBar: AppBar(
         title: Text("Prayer Logs"),
+        backgroundColor: primaryBackground,
         actions: [
           if (selecting)
             IconButton(
@@ -117,7 +120,7 @@ class _PrayerLogsPageState extends State<PrayerLogsPage> {
           return ListTile(
             title: Text(
               log.content.length > 40
-                  ? log.content.substring(0, 40) + "..."
+                  ? "${log.content.substring(0, 40)}..."
                   : log.content,
             ),
             subtitle: Text(log.createdAt),
@@ -126,10 +129,11 @@ class _PrayerLogsPageState extends State<PrayerLogsPage> {
               value: isSelected,
               onChanged: (value) {
                 setState(() {
-                  if (value == true)
+                  if (value == true) {
                     selectedIds.add(log.id);
-                  else
+                  } else {
                     selectedIds.remove(log.id);
+                  }
                 });
               },
             )
@@ -143,10 +147,11 @@ class _PrayerLogsPageState extends State<PrayerLogsPage> {
             onTap: selecting
                 ? () {
               setState(() {
-                if (isSelected)
+                if (isSelected) {
                   selectedIds.remove(log.id);
-                else
+                } else {
                   selectedIds.add(log.id);
+                }
               });
             }
                 : () => showLogDetail(log),
@@ -154,6 +159,7 @@ class _PrayerLogsPageState extends State<PrayerLogsPage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: primaryBackground,
         onPressed: showAddNoteDialog,
         child: Icon(Icons.add),
       ),

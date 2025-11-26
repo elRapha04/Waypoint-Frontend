@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'Verse of the Day',
+                'Here\'s a Bible Verse for You',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'Categories',
+                'What would you like to explore?',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
