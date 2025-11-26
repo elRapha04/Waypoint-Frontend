@@ -7,7 +7,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: secondaryBackground,
       appBar: AppBar(
-        title: Text('Waypoint'),
+        title: Text('WAYPOINT'),
         backgroundColor: primaryBackground,
         centerTitle: true
       ),
@@ -78,10 +78,10 @@ class HomePage extends StatelessWidget {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 children: [
-                  buildCategoryItem(context, 'Prayer Log', 'assets/images/1291997.jpg', '/prayerLogs'),
-                  buildCategoryItem(context, 'Reading Plan', 'assets/images/1292005.jpg', '/readingPlans'),
-                  buildCategoryItem(context, 'Answered Prayers', 'assets/images/1292005.jpg', '/answeredPrayers'),
-                  buildCategoryItem(context, 'About the Church', 'assets/images/1291997.jpg', '/aboutChurch'),
+                  buildCategoryItem(context, 'Prayer Log', 'assets/images/prayerLogs.jpg', '/prayerLogs'),
+                  buildCategoryItem(context, 'Reading Plan', 'assets/images/readingPlans.jpg', '/readingPlans'),
+                  buildCategoryItem(context, 'Answered Prayers', 'assets/images/answeredPrayers.jpg', '/answeredPrayers'),
+                  buildCategoryItem(context, 'About the Church', 'assets/images/aboutChurch.jpg', '/aboutChurch'),
                 ],
               ),
             ),
@@ -100,7 +100,7 @@ class HomePage extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/images/674632.jpg'),
+                      image: AssetImage('assets/images/lyrics.jpg'),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(12),
